@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <h1>URL Shortener</h1>
+    <form id="form">
+      <input type="url" id="url-input" placeholder="https://example.com/very/long/url" required>
+      <div class="expiry-group">
+        <label><input type="radio" name="expiry" value="0" checked> No expiry</label>
+        <label><input type="radio" name="expiry" value="86400"> 1 day</label>
+        <label><input type="radio" name="expiry" value="604800"> 7 days</label>
+        <label><input type="radio" name="expiry" value="2592000"> 30 days</label>
+        <label><input type="radio" name="expiry" value="custom"> Custom</label>
+        <div id="custom-date-wrapper">
+          <input type="datetime-local" id="custom-date">
+        </div>
+      </div>
+      <button type="submit">Shorten</button>
+    </form>
+    <p id="error"></p>
+    <div id="result"></div>
+  </main>
+  <script src="/script.js"></script>
+</body>
+</html>

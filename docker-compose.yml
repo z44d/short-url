@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8080:3000"
+    volumes:
+      - db-data:/app/data
+    environment:
+      DB_PATH: /app/data/urls.db
+      CODE_LENGTH: 6
+      NODE_ENV: production
+
+volumes:
+  db-data:
