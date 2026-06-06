@@ -60,8 +60,24 @@ form.addEventListener("submit", async (e) => {
     }
 
     const shortUrl = `${window.location.origin}/s/${data.short_code}`;
-    resultEl.innerHTML = `<a href="${shortUrl}" target="_blank">${shortUrl}</a><div class="hint">Expires: ${data.expires_at ? new Date(data.expires_at).toLocaleString() : "Never"}</div>`;
+    resultEl.innerHTML = `<a href="${shortUrl}" target="_blank">${shortUrl}</a><button class="copy-btn" data-url="${shortUrl}">Copy</button><div class="hint">Expires: ${data.expires_at ? new Date(data.expires_at).toLocaleString() : "Never"}</div>`;
     resultEl.style.display = "block";
+    resultEl
+      .querySelector(".copy-btn")
+      .addEventListener("click", async (e) => {
+        const btn = e.currentTarget;
+        try {
+          await navigator.clipboard.writeText(shortUrl);
+          btn.textContent = "Copied!";
+          btn.classList.add("copied");
+          setTimeout(() => {
+            btn.textContent = "Copy";
+            btn.classList.remove("copied");
+          }, 2000);
+        } catch {
+          showError("Failed to copy");
+        }
+      });
     urlInput.value = "";
   } catch (_e) {
     showError("Failed to connect");
